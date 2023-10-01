@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Guessing Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #game {
+            width: 300px;
+            margin: auto;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 50px;
+        }
+
+        p {
+            margin-top: 20px;
+        }
+
+        input {
+            margin-top: 10px;
+        }
+
+        button {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="game">
+        <h1>Guessing Game</h1>
+        <p>Guess a number between 1 and 10:</p>
+        <input type="number" id="guessInput">
+        <button onclick="checkGuess()">Submit</button>
+        <p id="result"></p>
+        <p id="attempts"></p>
+    </div>
+
+    <script>
+        var randomNumber = Math.floor(Math.random() * 10) + 1;
+        var attempts = 3;
+
+        function checkGuess() {
+            var guessInput = document.getElementById('guessInput');
+            var result = document.getElementById('result');
+            var attemptsElement = document.getElementById('attempts');
+
+            var guess = parseInt(guessInput.value);
+
+            if (guess === randomNumber) {
+                result.textContent = 'Congratulations! You guessed the correct number!';
+                result.style.color = 'green';
+                guessInput.disabled = true;
+            } else {
+                attempts--;
+                result.textContent = 'Wrong guess. Try again!';
+                result.style.color = 'red';
+                
+                if (attempts === 0) {
+                    result.textContent += ' You are out of attempts!';
+                    guessInput.disabled = true;
+                }
+            }
+
+            attemptsElement.textContent = 'Attempts left: ' + attempts;
+        }
+    </script>
+</body>
+</html>
